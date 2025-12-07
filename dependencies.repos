@@ -2,7 +2,7 @@ repositories:
   # AutoAPMS
   dep/auto-apms:
     type: git
-    url: https://github.com/robin-mueller/auto-apms.git
+    url: https://github.com/autoapms/auto-apms.git
     version: master
 
   # PX4

@@ -22,14 +22,14 @@ GoToLocal:
   class_name: ${PROJECT_NAME}::GoToAction
   description: "Commands the vehicle to go to a specified position in the local coordinate frame"
   topic: go_to_(input:frame)
-  port_defaults:
+  port_default:
     frame: local
 
 GoToGlobal:
   class_name: ${PROJECT_NAME}::GoToAction
   description: "Commands the vehicle to go to a specified position in the global coordinate frame"
   topic: go_to_(input:frame)
-  port_defaults:
+  port_default:
     frame: global
 
 Land:

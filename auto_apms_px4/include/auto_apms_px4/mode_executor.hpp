@@ -33,7 +33,7 @@
  *
  * > [!note]
  * > The required packages are hosted in a separate repository thus not part of standard AutoAPMS.
- * > Visit [auto-apms-px4](https://github.com/robin-mueller/auto-apms-px4) for more info.
+ * > Visit [auto-apms-px4](https://github.com/AutoAPMS/auto-apms-px4) for more info.
  */
 
 /**
