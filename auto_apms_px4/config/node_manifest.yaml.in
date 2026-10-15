@@ -63,6 +63,10 @@ GetLocalPosition:
   description: "Gets the current position of the vehicle in the local coordinate frame"
   # The topic (incl. its message version suffix) is resolved in the node implementation, see GetPosition.
 
+OffsetGlobalPosition:
+  class_name: ${PROJECT_NAME}::OffsetGlobalPosition
+  description: "Offsets a global position (lat, lon, alt) by a local NED vector [m] - e.g. to compute targets for SendCmdDoReposition"
+
 SetActuators:
   class_name: ${PROJECT_NAME}::SetActuatorsAction
   description: "Sends direct actuator commands (motors and/or servos) to the vehicle"

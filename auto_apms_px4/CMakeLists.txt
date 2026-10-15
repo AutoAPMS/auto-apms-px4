@@ -161,7 +161,7 @@ rclcpp_components_register_node(${PROJECT_NAME}_behavior_mode_executor
 #
 # Behavior tree node plugins for orchestrating PX4 from a behavior tree: skill action nodes (Arm, Takeoff, GoTo, ...),
 # the generic SendVehicleCommand and its SendCmdSetNavState specialization, and helper condition/action nodes (CheckNavState,
-# GetModeNavState, GetPosition). Loaded at runtime by the behavior tree executor.
+# GetModeNavState, GetPosition, OffsetGlobalPosition). Loaded at runtime by the behavior tree executor.
 
 add_library(${PROJECT_NAME}_behavior_tree_nodes SHARED
   "src/node/action/arm.cpp"
@@ -176,6 +176,7 @@ add_library(${PROJECT_NAME}_behavior_tree_nodes SHARED
   "src/node/action/send_cmd_set_nav_state.cpp"
   "src/node/action/send_cmd_do_reposition.cpp"
   "src/node/action/set_actuators.cpp"
+  "src/node/action/offset_global_position.cpp"
   "src/node/sub/get_position.cpp"
   "src/node/sub/check_nav_state.cpp"
   "src/node/sub/check_arming_state.cpp"
@@ -214,6 +215,7 @@ auto_apms_behavior_tree_register_nodes(${PROJECT_NAME}_behavior_tree_nodes
   "${PROJECT_NAME}::SendVehicleCommand"
   "${PROJECT_NAME}::SendCmdSetNavState"
   "${PROJECT_NAME}::SendCmdDoReposition"
+  "${PROJECT_NAME}::OffsetGlobalPosition"
   "${PROJECT_NAME}::CheckNavState"
   "${PROJECT_NAME}::CheckArmingState"
   "${PROJECT_NAME}::CheckModeCompleted"
