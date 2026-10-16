@@ -10,7 +10,11 @@ on:
 
 jobs:
   build_and_test:
-    uses: ./.github/workflows/build-and-test-reusable.yaml
+    uses: AutoAPMS/auto-apms/.github/workflows/build-and-test-reusable.yaml@master
     with:
       ros_distribution: jazzy
       docker_image: ubuntu:noble
+      package_name: |
+        auto_apms_px4
+        auto_apms_px4_interfaces
+      vcs_repo_file_url: ${GITHUB_WORKSPACE}/dependencies.repos
