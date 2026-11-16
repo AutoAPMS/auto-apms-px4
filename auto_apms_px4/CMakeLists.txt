@@ -120,7 +120,8 @@ rclcpp_components_register_nodes(${PROJECT_NAME}_skills
 # ------------ Behavior Mode Executor --------------
 #
 # PX4 mode executor that runs an AutoAPMS behavior in-process when put in charge by the FMU. Configured entirely via
-# ROS 2 parameters. The behavior is assembled from standard AutoAPMS nodes (requires the PX4 skills to be active).
+# ROS 2 parameters. The behavior is assembled from standard AutoAPMS nodes (skill nodes such as GoTo
+# additionally require the PX4 skills to be running).
 # Registered as a ROS 2 component (single node hosting the mode executor, its owned mode and the tree engine).
 
 generate_parameter_library(behavior_mode_executor_params
@@ -159,19 +160,12 @@ rclcpp_components_register_node(${PROJECT_NAME}_behavior_mode_executor
 #
 # ------------ Behavior tree nodes --------------
 #
-# Behavior tree node plugins for orchestrating PX4 from a behavior tree: skill action nodes (Arm, Takeoff, GoTo, ...),
+# Behavior tree node plugins for orchestrating PX4 from a behavior tree: skill action nodes (GoTo, SetActuators),
 # the generic SendVehicleCommand and its SendCmdSetNavState specialization, and helper condition/action nodes (CheckNavState,
 # GetModeNavState, GetPosition, OffsetGlobalPosition). Loaded at runtime by the behavior tree executor.
 
 add_library(${PROJECT_NAME}_behavior_tree_nodes SHARED
-  "src/node/action/arm.cpp"
-  "src/node/action/disarm.cpp"
-  "src/node/action/enable_hold.cpp"
   "src/node/action/goto.cpp"
-  "src/node/action/land.cpp"
-  "src/node/action/mission.cpp"
-  "src/node/action/rtl.cpp"
-  "src/node/action/takeoff.cpp"
   "src/node/action/send_vehicle_command.cpp"
   "src/node/action/send_cmd_set_nav_state.cpp"
   "src/node/action/send_cmd_do_reposition.cpp"
@@ -203,15 +197,8 @@ target_compile_definitions(${PROJECT_NAME}_behavior_tree_nodes PRIVATE
   AUTO_APMS_PX4_EXPORT_NODE_PLUGIN
 )
 auto_apms_behavior_tree_register_nodes(${PROJECT_NAME}_behavior_tree_nodes
-  "${PROJECT_NAME}::ArmAction"
-  "${PROJECT_NAME}::DisarmAction"
-  "${PROJECT_NAME}::EnableHoldAction"
   "${PROJECT_NAME}::GoToAction"
-  "${PROJECT_NAME}::LandAction"
-  "${PROJECT_NAME}::MissionAction"
-  "${PROJECT_NAME}::RTLAction"
   "${PROJECT_NAME}::SetActuatorsAction"
-  "${PROJECT_NAME}::TakeoffAction"
   "${PROJECT_NAME}::SendVehicleCommand"
   "${PROJECT_NAME}::SendCmdSetNavState"
   "${PROJECT_NAME}::SendCmdDoReposition"

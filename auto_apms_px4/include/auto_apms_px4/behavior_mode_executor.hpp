@@ -94,7 +94,8 @@ private:
  * behavior finishes, a configurable in-charge reaction (hold/RTL/land/disarm/complete/none) is performed and a fresh
  * tree is prepared for the next activation.
  *
- * The behavior itself is built from standard AutoAPMS nodes and drives the vehicle through the regular PX4 skills.
+ * The behavior itself is built from standard AutoAPMS nodes, preferably the vehicle command nodes that talk to
+ * PX4 directly (skill nodes such as GoTo additionally require the PX4 skills to be running).
  * Before starting, the executor publishes its `VehicleCommand` source component on the global blackboard (under the
  * key configured via the `AUTO_APMS_PX4_SOURCE_COMPONENT_GLOBAL_KEY` compile definition) so that ownership-aware
  * nodes (e.g. `%SendCmdSetNavState`) can attribute their commands to the executor.
@@ -118,7 +119,7 @@ public:
   struct Config
   {
     CompletionReaction on_completion{CompletionReaction::HOLD};  ///< Reaction after the behavior succeeds.
-    CompletionReaction on_failure{CompletionReaction::RTL};      ///< Reaction after the behavior fails.
+    CompletionReaction on_failure{CompletionReaction::HOLD};     ///< Reaction after the behavior fails.
     bool defer_failsafes{false};  ///< Defer FMU failsafes while a behavior is running (in-charge privilege).
   };
 

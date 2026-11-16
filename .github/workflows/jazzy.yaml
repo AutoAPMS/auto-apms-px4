@@ -6,7 +6,7 @@ on:
       - "release/*"
   pull_request:
     branches:
-      - "*"
+      - "**"
 
 jobs:
   build_and_test:
